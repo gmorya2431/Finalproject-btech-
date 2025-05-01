@@ -29,7 +29,7 @@ def predict():
     ph = request.form['Ph']
     rainfall = request.form['Rainfall']
 
-    feature_list = [N, P, K, temp, humidity, ph, rainfall]
+    feature_list = [float(N), float(P), float(K), float(temp), float(humidity), float(ph), float(rainfall)]
     single_pred = np.array(feature_list).reshape(1, -1)
 
     scaled_features = ms.transform(single_pred)
@@ -47,6 +47,9 @@ def predict():
     else:
         result = "Sorry, we could not determine the best crop to be cultivated with the provided data."
     return render_template('index.html',result = result)
+    print("Final features going to model:", final_features)
+    print("Raw prediction:", prediction)
+
 if __name__ == "__main__":
     app.run(debug=True)
 
